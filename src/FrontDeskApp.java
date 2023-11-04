@@ -4,8 +4,6 @@ import java.time.*;
 import java.time.format.*;
 import java.util.*;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class FrontDeskApp {
     /*
      * Notes:
@@ -35,6 +33,7 @@ public class FrontDeskApp {
         String dbPassword = "admin";
 
         try {
+            Class.forName("org.h2.Driver");
             // Connecting to h2 DB
             Connection connection = DriverManager.getConnection(jdbcURL, dbUsername, dbPassword);
             System.out.println("---------Connected to Database.---------");
@@ -436,7 +435,7 @@ public class FrontDeskApp {
         if (availableSlots < 0) {
             availableSlots = 0;
         }
-        System.out.print(StringUtils.capitalize(size) + " Box Storage has " + availableSlots);
+        System.out.print(size.substring(0, 1).toUpperCase() + size.substring(1) + " Box Storage has " + availableSlots);
         System.out.println((availableSlots == 1) ? " slot available." : " slots available.");
         return availableSlots;
     }
